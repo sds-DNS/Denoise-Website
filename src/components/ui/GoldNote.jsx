@@ -1,3 +1,3 @@
 export default function GoldNote({ children }) {
-  return <span className="text-[#9E7A16]">{children}</span>;
+  return <span className="text-gold">{children}</span>;
 }

@@ -1,6 +1,51 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+/*
+  Single source of truth for the DENOISE palette.
+  Each --color-* token generates Tailwind utilities (bg-brand, text-ink, …)
+  and is also available as var(--color-*) inside arbitrary values
+  (gradients, shadows). Shadow tokens generate shadow-* utilities.
+*/
+@theme {
+  /* Brand purples */
+  --color-brand: #5b2eff;
+  --color-brand-dark: #4822d8;
+  --color-brand-deep: #4a22d8;
+  --color-brand-light: #8b6bff;
+
+  /* Gold accents */
+  --color-gold: #9e7a16;
+  --color-gold-bright: #c9a227;
+  --color-gold-tint: #fff8e3;
+
+  /* Ink / text */
+  --color-ink: #17131f;
+  --color-ink-soft: #2f293a;
+  --color-muted: #4a4654;
+  --color-muted-2: #5b5568;
+  --color-muted-3: #615b6f;
+
+  /* Surfaces */
+  --color-cream: #fffefb;
+  --color-lilac-50: #f9f6ff;
+  --color-lilac-100: #f8f5ff;
+  --color-lilac-200: #f7f3ff;
+  --color-lilac-300: #f6f2ff;
+  --color-lilac-400: #fbf8ff;
+
+  /* Brand-tinted shadows (rgba derived from --color-brand) */
+  --shadow-brand-sm: 0 14px 32px rgba(91, 46, 255, 0.22);
+  --shadow-brand: 0 14px 32px rgba(91, 46, 255, 0.24);
+  --shadow-brand-cta: 0 14px 32px rgba(91, 46, 255, 0.26);
+  --shadow-brand-cta-hover: 0 18px 42px rgba(91, 46, 255, 0.34);
+  --shadow-brand-card: 0 16px 42px rgba(91, 46, 255, 0.1);
+  --shadow-brand-pill: 0 12px 28px rgba(91, 46, 255, 0.24);
+  --shadow-brand-ring: 0 0 0 4px rgba(91, 46, 255, 0.1);
+  --shadow-brand-glow: 0 0 18px rgba(91, 46, 255, 0.55);
+  --shadow-soft: 0 24px 80px rgba(24, 24, 40, 0.1);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -8,5 +53,5 @@ html {
 body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #fffefb;
+  background: var(--color-cream);
 }

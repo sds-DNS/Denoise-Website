@@ -19,6 +19,7 @@ if (typeof window !== "undefined") {
 
 function App() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [challengeText, setChallengeText] = useState("");
 
   const handlePackageSelect = (packageName) => {
@@ -30,8 +31,17 @@ function App() {
     document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    // Placeholder for the real CRM/email backend call.
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    setIsSubmitting(false);
+    setSubmitted(true);
+  };
+
   return (
-    <main className="min-h-screen bg-[#FFFEFB] text-[#17131F] selection:bg-[#5B2EFF] selection:text-white">
+    <main className="min-h-screen bg-cream text-ink selection:bg-brand selection:text-white">
       <Header />
       <Hero />
       <Problem />
@@ -44,10 +54,8 @@ function App() {
       <Insights />
       <Consultation
         submitted={submitted}
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSubmitted(true);
-        }}
+        isSubmitting={isSubmitting}
+        onSubmit={handleSubmit}
         challengeText={challengeText}
         onChallengeChange={(event) => setChallengeText(event.target.value)}
       />
