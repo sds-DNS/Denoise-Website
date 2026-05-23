@@ -23,7 +23,8 @@ export function runDenoiseSelfTests() {
     },
     {
       name: "removes selected package prefix when body exists",
-      input: "Selected package: Entry Engagement\n\nCurrent operational challenge: We need better visibility.",
+      input:
+        "Selected package: Entry Engagement\n\nCurrent operational challenge: We need better visibility.",
       expected: "Current operational challenge: We need better visibility.",
     },
     {

@@ -4,14 +4,24 @@ import { fadeUp } from "../../lib/animations";
 export default function ImagePanel({ title, prompt, src, alt }) {
   if (src) {
     return (
-      <motion.div variants={fadeUp} className="group relative h-full min-h-[360px] overflow-hidden rounded-[2rem] bg-white shadow-soft">
-        <img src={src} alt={alt || title} className="h-full w-full scale-[1.015] rounded-[2rem] object-cover object-center" />
+      <motion.div
+        variants={fadeUp}
+        className="group relative h-full min-h-[360px] overflow-hidden rounded-[2rem] bg-white shadow-soft"
+      >
+        <img
+          src={src}
+          alt={alt || title}
+          className="h-full w-full scale-[1.015] rounded-[2rem] object-cover object-center"
+        />
       </motion.div>
     );
   }
 
   return (
-    <motion.div variants={fadeUp} className="group relative h-full min-h-[360px] overflow-hidden rounded-[2rem] bg-white shadow-soft">
+    <motion.div
+      variants={fadeUp}
+      className="group relative h-full min-h-[360px] overflow-hidden rounded-[2rem] bg-white shadow-soft"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgb(from_var(--color-brand)_r_g_b_/_0.22),transparent_35%),radial-gradient(circle_at_78%_76%,rgb(from_var(--color-gold-bright)_r_g_b_/_0.18),transparent_32%),linear-gradient(135deg,var(--color-white),var(--color-lilac-300)_52%,var(--color-gold-tint))]" />
       <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgb(from_var(--color-brand)_r_g_b_/_0.08)_1px,transparent_1px),linear-gradient(90deg,rgb(from_var(--color-brand)_r_g_b_/_0.08)_1px,transparent_1px)] [background-size:42px_42px]" />
       <div className="absolute left-8 right-8 top-8 rounded-2xl border border-white/70 bg-white/65 p-5 shadow-sm backdrop-blur-md">

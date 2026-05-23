@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\""
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -21,6 +23,7 @@
     "@tailwindcss/postcss": "^4.3.0",
     "autoprefixer": "latest",
     "postcss": "latest",
+    "prettier": "^3.8.3",
     "tailwindcss": "latest"
   }
 }
