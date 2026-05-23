@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { fadeUp, stagger, replayViewport } from "../../lib/animations";
 import SectionLabel from "../ui/SectionLabel";
 import SectionHeading from "../ui/SectionHeading";
 import ImagePanel from "../ui/ImagePanel";
@@ -15,26 +17,43 @@ export default function Consultation({
     <section id="consultation" className="relative overflow-hidden px-6 py-24 lg:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgb(from_var(--color-brand)_r_g_b_/_0.14),transparent_34%),radial-gradient(circle_at_82%_24%,rgb(from_var(--color-gold-bright)_r_g_b_/_0.14),transparent_30%),linear-gradient(180deg,var(--color-white),var(--color-lilac-100))]" />
       <div className="relative mx-auto grid max-w-7xl items-stretch gap-14 lg:grid-cols-[.9fr_1.1fr]">
-        <div className="h-full">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={fadeUp}
+          className="h-full"
+        >
           <ImagePanel
             title="Offering structured direction"
             src="https://res.cloudinary.com/dzhfxged2/image/upload/v1779265019/8._CONSULTATION_SECTION_enjjw6.png"
             alt="White marble executive statue extending a document forward for the consultation section"
           />
-        </div>
-        <div className="flex h-full flex-col">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={stagger}
+          className="flex h-full flex-col"
+        >
           <div>
-            <SectionLabel>Initial Consultation</SectionLabel>
-            <SectionHeading>Request an Initial Consultation</SectionHeading>
-            <p className="mt-6 text-lg leading-8 text-muted">
+            <motion.div variants={fadeUp}>
+              <SectionLabel>Initial Consultation</SectionLabel>
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <SectionHeading>Request an Initial Consultation</SectionHeading>
+            </motion.div>
+            <motion.p variants={fadeUp} className="mt-6 text-lg leading-8 text-muted">
               Tell us where operational clarity is breaking inside your organization.
-            </p>
-            <p className="mt-4 text-lg font-semibold leading-8 text-ink">
+            </motion.p>
+            <motion.p variants={fadeUp} className="mt-4 text-lg font-semibold leading-8 text-ink">
               Every engagement begins with understanding operational reality before recommending
               change.
-            </p>
+            </motion.p>
           </div>
-          <form
+          <motion.form
+            variants={fadeUp}
             onSubmit={onSubmit}
             className="mt-7 rounded-[2rem] border border-brand/12 bg-white/86 p-7 shadow-soft backdrop-blur-md md:p-8"
           >
@@ -106,8 +125,8 @@ export default function Consultation({
                 Request captured. Connect this form to your CRM or email backend before launch.
               </p>
             )}
-          </form>
-        </div>
+          </motion.form>
+        </motion.div>
       </div>
     </section>
   );

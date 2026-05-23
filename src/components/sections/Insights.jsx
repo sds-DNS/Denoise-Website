@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { fadeUp, stagger, replayViewport } from "../../lib/animations";
 import { insights } from "../../data";
 import SectionLabel from "../ui/SectionLabel";
 import SectionHeading from "../ui/SectionHeading";
@@ -9,23 +11,34 @@ export default function Insights() {
     <section id="insights" className="bg-lilac-50 px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-stretch gap-12 lg:grid-cols-[.72fr_.98fr]">
-          <div className="flex h-full flex-col pt-1">
-            <SectionLabel>Insights</SectionLabel>
-            <SectionHeading>Operational insights.</SectionHeading>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={replayViewport}
+            variants={stagger}
+            className="flex h-full flex-col pt-1"
+          >
+            <motion.div variants={fadeUp}>
+              <SectionLabel>Insights</SectionLabel>
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <SectionHeading>Operational insights.</SectionHeading>
+            </motion.div>
+            <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg leading-8 text-muted">
               We believe operational knowledge should compound across the industry. DENOISE shares
               practical insights, operational thinking, and implementation lessons gathered through
               working directly with scaling companies and complex execution environments.
-            </p>
-            <a
+            </motion.p>
+            <motion.a
+              variants={fadeUp}
               href="#"
               className="mt-7 inline-block text-sm font-bold text-brand transition hover:text-gold"
             >
               View all insights
-            </a>
+            </motion.a>
             <div className="mt-8 grid flex-1 auto-rows-fr gap-4 md:grid-cols-2">
               {insights.concat(["Execution Visibility in Scaling Teams"]).map((title, index) => (
-                <article key={title} className="h-full">
+                <motion.article key={title} variants={fadeUp} className="h-full">
                   <UnifiedCard className="flex h-full flex-col justify-between p-6">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
@@ -40,17 +53,23 @@ export default function Insights() {
                       visibility, and stronger operational control.
                     </p>
                   </UnifiedCard>
-                </article>
+                </motion.article>
               ))}
             </div>
-          </div>
-          <div className="h-full">
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={replayViewport}
+            variants={fadeUp}
+            className="h-full"
+          >
             <ImagePanel
               title="Operational thinking and analysis"
               src="https://res.cloudinary.com/dzhfxged2/image/upload/v1779265015/7._INSIGHTS_SECTION_lo0rab.png"
               alt="White marble executive statue reviewing blank documents for the insights section"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
