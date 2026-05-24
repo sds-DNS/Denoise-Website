@@ -9,9 +9,10 @@ import Spinner from "../ui/Spinner";
 export default function Consultation({
   submitted,
   isSubmitting,
+  errorMessage,
   onSubmit,
-  challengeText,
-  onChallengeChange,
+  form,
+  onFieldChange,
 }) {
   return (
     <section id="consultation" className="relative overflow-hidden px-6 py-24 lg:px-8">
@@ -63,6 +64,8 @@ export default function Consultation({
                 placeholder="Name"
                 title="Enter your name"
                 aria-label="Name"
+                value={form.name}
+                onChange={onFieldChange("name")}
                 className="rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring"
               />
               <input
@@ -71,6 +74,8 @@ export default function Consultation({
                 placeholder="Email"
                 title="Enter your email address"
                 aria-label="Email address"
+                value={form.email}
+                onChange={onFieldChange("email")}
                 className="rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring"
               />
               <input
@@ -78,6 +83,8 @@ export default function Consultation({
                 placeholder="Position"
                 title="Enter your position"
                 aria-label="Position"
+                value={form.position}
+                onChange={onFieldChange("position")}
                 className="rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring"
               />
               <input
@@ -85,12 +92,16 @@ export default function Consultation({
                 placeholder="Company"
                 title="Enter your company"
                 aria-label="Company"
+                value={form.company}
+                onChange={onFieldChange("company")}
                 className="rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring"
               />
               <input
                 placeholder="Company Size"
                 title="Enter your company size"
                 aria-label="Company size"
+                value={form.companySize}
+                onChange={onFieldChange("companySize")}
                 className="rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring md:col-span-2"
               />
             </div>
@@ -100,8 +111,8 @@ export default function Consultation({
               title="Describe your current operational challenge"
               aria-label="Current operational challenge"
               rows={7}
-              value={challengeText}
-              onChange={onChallengeChange}
+              value={form.challenge}
+              onChange={onFieldChange("challenge")}
               className="mt-5 w-full resize-none rounded-2xl border border-ink/12 bg-white px-5 py-4 text-ink outline-none transition focus:border-brand focus:shadow-brand-ring"
             />
             <button
@@ -122,8 +133,11 @@ export default function Consultation({
             </button>
             {submitted && (
               <p className="mt-4 text-center text-sm font-semibold text-brand-deep">
-                Request captured. Connect this form to your CRM or email backend before launch.
+                Thank you. Your request has been received — we'll be in touch shortly.
               </p>
+            )}
+            {errorMessage && (
+              <p className="mt-4 text-center text-sm font-semibold text-red-600">{errorMessage}</p>
             )}
           </motion.form>
         </motion.div>

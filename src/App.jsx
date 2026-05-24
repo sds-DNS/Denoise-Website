@@ -17,27 +17,60 @@ if (typeof window !== "undefined") {
   runDenoiseSelfTests();
 }
 
+const emptyForm = {
+  name: "",
+  email: "",
+  position: "",
+  company: "",
+  companySize: "",
+  challenge: "",
+};
+
 function App() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [challengeText, setChallengeText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [form, setForm] = useState(emptyForm);
+
+  const updateField = (field) => (event) =>
+    setForm((prev) => ({ ...prev, [field]: event.target.value }));
 
   const handlePackageSelect = (packageName) => {
-    const cleanExistingText = stripSelectedPackagePrefix(challengeText);
+    const cleanExistingText = stripSelectedPackagePrefix(form.challenge);
     const defaultChallengeText = "Current operational challenge: ";
     const nextChallengeText = cleanExistingText || defaultChallengeText;
 
-    setChallengeText(`Selected package: ${packageName}\n\n${nextChallengeText}`);
+    setForm((prev) => ({
+      ...prev,
+      challenge: `Selected package: ${packageName}\n\n${nextChallengeText}`,
+    }));
     document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-    // Placeholder for the real CRM/email backend call.
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setIsSubmitting(false);
-    setSubmitted(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+      setForm(emptyForm);
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,9 +88,10 @@ function App() {
       <Consultation
         submitted={submitted}
         isSubmitting={isSubmitting}
+        errorMessage={errorMessage}
         onSubmit={handleSubmit}
-        challengeText={challengeText}
-        onChallengeChange={(event) => setChallengeText(event.target.value)}
+        form={form}
+        onFieldChange={updateField}
       />
       <Footer />
     </main>

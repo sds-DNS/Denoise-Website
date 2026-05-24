@@ -12,6 +12,7 @@
     "format:check": "prettier --check \"src/**/*.{js,jsx,css}\""
   },
   "dependencies": {
+    "@notionhq/client": "^5.22.0",
     "@vitejs/plugin-react": "latest",
     "framer-motion": "latest",
     "lucide-react": "latest",
@@ -21,9 +22,11 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
+    "@vercel/node": "^5.8.4",
     "autoprefixer": "latest",
     "postcss": "latest",
     "prettier": "^3.8.3",
-    "tailwindcss": "latest"
+    "tailwindcss": "latest",
+    "typescript": "^6.0.3"
   }
 }
