@@ -6,12 +6,12 @@ export default function ImagePanel({ title, prompt, src, alt }) {
     return (
       <motion.div
         variants={fadeUp}
-        className="group relative h-full min-h-[360px] overflow-hidden rounded-[2rem] bg-white shadow-soft"
+        className="group relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-soft sm:aspect-[3/4] lg:aspect-auto lg:h-full lg:min-h-[360px]"
       >
         <img
           src={src}
           alt={alt || title}
-          className="h-full w-full scale-[1.015] rounded-[2rem] object-cover object-center"
+          className="h-full w-full rounded-[2rem] object-cover object-top"
         />
       </motion.div>
     );
