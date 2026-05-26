@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { stripSelectedPackagePrefix, runDenoiseSelfTests } from "./lib/text";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Hero from "./components/sections/Hero";
@@ -12,10 +11,7 @@ import WhyDenoise from "./components/sections/WhyDenoise";
 import Proof from "./components/sections/Proof";
 import Insights from "./components/sections/Insights";
 import Consultation from "./components/sections/Consultation";
-
-if (typeof window !== "undefined") {
-  runDenoiseSelfTests();
-}
+import { validateConsultationForm } from "./lib/validation";
 
 const emptyForm = {
   name: "",
@@ -23,6 +19,7 @@ const emptyForm = {
   position: "",
   company: "",
   companySize: "",
+  selectedPackage: "",
   challenge: "",
 };
 
@@ -30,27 +27,43 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [form, setForm] = useState(emptyForm);
 
-  const updateField = (field) => (event) =>
-    setForm((prev) => ({ ...prev, [field]: event.target.value }));
+  const updateField = (field) => (event) => {
+    const value = event.target.value;
+    setForm((prev) => ({ ...prev, [field]: value }));
+    // Clear an existing error for this field as soon as the user edits it.
+    setFieldErrors((prev) => {
+      if (!prev[field]) return prev;
+      const { [field]: _removed, ...rest } = prev;
+      return rest;
+    });
+  };
 
   const handlePackageSelect = (packageName) => {
-    const cleanExistingText = stripSelectedPackagePrefix(form.challenge);
-    const defaultChallengeText = "Current operational challenge: ";
-    const nextChallengeText = cleanExistingText || defaultChallengeText;
-
-    setForm((prev) => ({
-      ...prev,
-      challenge: `Selected package: ${packageName}\n\n${nextChallengeText}`,
-    }));
+    setForm((prev) => ({ ...prev, selectedPackage: packageName }));
+    setFieldErrors((prev) => {
+      const { selectedPackage: _r, ...rest } = prev;
+      return rest;
+    });
     document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
     setErrorMessage("");
+
+    // Client-side validation first so users get instant feedback per field.
+    const localErrors = validateConsultationForm(form);
+    if (Object.keys(localErrors).length > 0) {
+      setFieldErrors(localErrors);
+      setErrorMessage("Please fix the highlighted fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFieldErrors({});
 
     try {
       const response = await fetch("/api/consultation", {
@@ -59,8 +72,10 @@ function App() {
         body: JSON.stringify(form),
       });
 
+      const data = await response.json().catch(() => ({}));
+
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
+        if (data.fieldErrors) setFieldErrors(data.fieldErrors);
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
@@ -89,6 +104,7 @@ function App() {
         submitted={submitted}
         isSubmitting={isSubmitting}
         errorMessage={errorMessage}
+        fieldErrors={fieldErrors}
         onSubmit={handleSubmit}
         form={form}
         onFieldChange={updateField}
