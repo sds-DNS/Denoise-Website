@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.29.3",
   "scripts": {
     "dev": "vite",
+    "dev:full": "vercel dev --listen 3000 --yes",
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
@@ -27,6 +28,7 @@
     "postcss": "latest",
     "prettier": "^3.8.3",
     "tailwindcss": "latest",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vercel": "^54.5.0"
   }
 }

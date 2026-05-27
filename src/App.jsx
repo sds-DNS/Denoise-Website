@@ -62,6 +62,8 @@ function App() {
       return;
     }
 
+    // isSubmitting drives the loading spinner + disabled state on the
+    // submit button inside <Consultation /> (see Consultation.jsx).
     setIsSubmitting(true);
     setFieldErrors({});
 

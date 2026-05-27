@@ -92,17 +92,21 @@ Production, Preview, and Development):
 
 Redeploy after adding them.
 
-## 6. Local development (optional)
+## 6. Local development
 
-Copy `.env.example` to `.env.local`, fill in the two values, then run the form
-against the function with the Vercel CLI:
+Copy `.env.example` to `.env` (or `.env.local`), fill in `NOTION_TOKEN` and
+`NOTION_DATABASE_ID`, then:
 
 ```bash
-pnpm dlx vercel dev
+pnpm dev:full     # → http://localhost:3000  (frontend + API)
 ```
 
-(Plain `pnpm dev` runs only the Vite frontend — the `/api` function needs the
-Vercel runtime, which `vercel dev` provides.)
+This runs Vercel's local runtime, which serves the Vite frontend AND the
+`/api/consultation` function from the same origin (so the form's relative
+`fetch("/api/consultation")` call works as it does in production).
+
+Plain `pnpm dev` runs only the Vite frontend on port 5173 — fine for UI work,
+but the form will get 404 from `/api/consultation`.
 
 ## Validation behaviour
 

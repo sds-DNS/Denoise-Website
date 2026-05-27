@@ -15,26 +15,45 @@ corepack enable
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev          # frontend only (Vite, http://localhost:5173)
+pnpm dev:full     # frontend + API function (Vercel, http://localhost:3000)
 ```
 
-The dev server prints a local URL (default `http://localhost:5173`).
+Use **`pnpm dev`** for UI work — fast Vite HMR, but `/api/consultation` 404s.
+Use **`pnpm dev:full`** when you need the form to actually submit to the Notion
+API end-to-end. That command runs the real Vercel runtime locally on port 3000,
+serving both the frontend and the serverless function from the same origin (so
+the relative `fetch("/api/consultation")` call just works).
+
+Requires the Notion env vars set in `.env` (or `.env.local`) — see
+[docs/notion-form-setup.md](docs/notion-form-setup.md).
 
 ## Build for production
 
 ```bash
 pnpm build      # outputs to dist/
-pnpm preview    # serve the production build locally
+pnpm preview    # serve the production build locally (frontend only)
 ```
 
 ## Deploying to Vercel
 
 Vercel auto-detects the framework (Vite) and the package manager from the
-committed `pnpm-lock.yaml`. No `vercel.json` is required. Defaults:
+committed `pnpm-lock.yaml`. The repo includes a minimal `vercel.json` so
+`vercel dev` and CI use the same install/build commands:
 
 - **Install command:** `pnpm install` (uses `--frozen-lockfile` in CI)
 - **Build command:** `pnpm build`
 - **Output directory:** `dist`
+
+The consultation form requires two **environment variables** to be set in the
+Vercel project settings (Production, Preview, **and** Development scopes):
+
+- `NOTION_TOKEN` — Notion integration secret
+- `NOTION_DATABASE_ID` — target CRM database id
+
+Without these the API returns "Server is not configured". Setup details and
+the required Notion DB schema are in
+[docs/notion-form-setup.md](docs/notion-form-setup.md).
 
 > **Keep the lockfile in sync.** Because CI installs are frozen, a
 > `pnpm-lock.yaml` that doesn't match `package.json` will fail the build. After
@@ -52,14 +71,27 @@ src/
   data.js                   Section content (copy, lists, pricing, icons)
   lib/
     animations.js           Shared Framer Motion variants
-    text.js                 Form-prefill helper + self-tests
+    validation.js           Client-side form validation (mirrors api/)
+    styles.js               Shared Tailwind class strings
   components/
     Header.jsx, Footer.jsx
-    ui/                     Reusable primitives (SectionLabel, GoldNote,
-                            UnifiedCard, ImagePanel, CTAButton)
-    sections/              One component per page section (Hero, Problem,
+    ui/                     Reusable primitives (SectionLabel, SectionHeading,
+                            GoldNote, UnifiedCard, ImagePanel, CTAButton,
+                            FormField, Spinner)
+    sections/               One component per page section (Hero, Problem,
                             WhatWeDo, HowWeWork, Systems, Pricing,
                             WhyDenoise, Proof, Insights, Consultation)
+
+api/
+  consultation.ts           Vercel serverless function: receives the form
+                            submission and writes it to Notion.
+
+shared/
+  form-constants.js         Options + validation rules shared between the
+                            React form and the API function.
+
+public/
+  favicon.*, site.webmanifest, apple-touch-icon.png
 ```
 
 ## Notes for developers
@@ -74,7 +106,9 @@ src/
 - **Editable content** lives in `src/data.js` — update copy and lists there.
 - **Images and logo** are loaded from Cloudinary URLs inside the section
   components.
-- **The consultation form** simulates submission (loading spinner + disabled
-  state) but does not yet send data anywhere. Connect it to an email, CRM,
-  backend, or form service in the `handleSubmit` function in `src/App.jsx`
-  before launch.
+- **The consultation form** is wired to a Vercel serverless function
+  (`api/consultation.ts`) that writes submissions to a Notion CRM database.
+  See [docs/notion-form-setup.md](docs/notion-form-setup.md) for the database
+  schema, integration setup, and the required environment variables. To test
+  the form end-to-end locally, use `pnpm dev:full` (runs the function on
+  `localhost:3000` against your `.env`).
