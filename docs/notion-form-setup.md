@@ -25,10 +25,12 @@ Create a Notion database (table) with these **exact** property names and types
 | Position                | Rich text | required                                           |
 | Company                 | Rich text | required                                           |
 | Company Size            | Select    | options below                                      |
-| Selected Package        | Select    | options below                                      |
+| Package Selected        | Select    | options below                                      |
 | Current Ops Challenge   | Rich text | required                                           |
 | Source                  | Select    | option `Website Form` (more sources can be added)  |
-| Submitted At            | Date      | optional, set automatically                        |
+
+> Notion's built-in **Created time** system property records the submission
+> time automatically — no manual "Submitted At" column is needed.
 
 ### Select options
 
@@ -41,11 +43,11 @@ Create a Notion database (table) with these **exact** property names and types
 - 51–100 Employees
 - 101–250 Employees
 - 251–500 Employees
-- 500 Employees & Above
+- 500 and Above
 
 > Note: the "–" between the numbers is an en-dash (U+2013), not a hyphen.
 
-**Selected Package:**
+**Package Selected:**
 
 - Entry Engagement
 - Scale Engagement
@@ -118,7 +120,7 @@ submission (so neither side can be bypassed):
 - **Email** must be syntactically valid, and **public/free providers are
   blocked** (gmail, yahoo, hotmail, outlook, icloud, proton, aol, etc. — full
   list in `shared/form-constants.js`).
-- **Company Size** and **Selected Package** must match one of the option values
+- **Company Size** and **Package Selected** must match one of the option values
   above.
 - **Source** is always set to `Website Form` server-side, regardless of payload.
 

@@ -11,7 +11,7 @@ export const COMPANY_SIZES = [
   "51–100 Employees",
   "101–250 Employees",
   "251–500 Employees",
-  "500 Employees & Above",
+  "500 and Above",
 ];
 
 export const PACKAGES = ["Entry Engagement", "Scale Engagement"];

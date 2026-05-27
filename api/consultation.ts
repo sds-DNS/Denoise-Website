@@ -20,10 +20,12 @@ import {
  *   - Position               (Rich text)
  *   - Company                (Rich text)
  *   - Company Size           (Select)        options in shared/form-constants.js
- *   - Selected Package       (Select)        options in shared/form-constants.js
+ *   - Package Selected       (Select)        options in shared/form-constants.js
  *   - Current Ops Challenge  (Rich text)
  *   - Source                 (Select)        always set to "Website Form" here
- *   - Submitted At           (Date)          [optional]
+ *
+ * Notion's built-in "Created time" system property auto-records when each
+ * row was added, so no manual submission-time column is needed.
  */
 
 type ConsultationPayload = {
@@ -125,10 +127,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Position: { rich_text: [{ text: { content: fields.position } }] },
         Company: { rich_text: [{ text: { content: fields.company } }] },
         "Company Size": { select: { name: fields.companySize } },
-        "Selected Package": { select: { name: fields.selectedPackage } },
+        "Package Selected": { select: { name: fields.selectedPackage } },
         "Current Ops Challenge": { rich_text: [{ text: { content: fields.challenge } }] },
         Source: { select: { name: SOURCE } },
-        "Submitted At": { date: { start: new Date().toISOString() } },
+        // Notion auto-tracks the row creation time via its built-in
+        // "Created time" property — no manual "Submitted At" needed.
       },
     });
 
