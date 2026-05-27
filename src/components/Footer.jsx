@@ -1,4 +1,10 @@
 import { Mail } from "lucide-react";
+import { buildCloudinaryUrl } from "../lib/cloudinary";
+
+const LOGO_SRC = buildCloudinaryUrl(
+  "https://res.cloudinary.com/dzhfxged2/image/upload/v1779270124/Asset_1_ngs0jf.png",
+  { width: 480 }
+);
 
 function LinkedinIcon({ className }) {
   return (
@@ -16,8 +22,12 @@ export default function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row md:items-center">
         <div>
           <img
-            src="https://res.cloudinary.com/dzhfxged2/image/upload/v1779270124/Asset_1_ngs0jf.png"
+            src={LOGO_SRC}
             alt="DENOISE footer logo"
+            width="220"
+            height="40"
+            loading="lazy"
+            decoding="async"
             className="block h-9 w-auto object-contain"
           />
           <p className="mt-3 text-sm text-muted-3">

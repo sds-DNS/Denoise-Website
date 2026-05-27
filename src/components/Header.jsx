@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import CTAButton from "./ui/CTAButton";
+import { buildCloudinaryUrl } from "../lib/cloudinary";
+
+const LOGO_SRC = buildCloudinaryUrl(
+  "https://res.cloudinary.com/dzhfxged2/image/upload/v1779270124/Asset_1_ngs0jf.png",
+  { width: 480 }
+);
 
 const navLinks = [
   { href: "#problem", label: "Problem" },
@@ -20,8 +26,12 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <a href="#home" className="flex items-center" onClick={closeMenu}>
           <img
-            src="https://res.cloudinary.com/dzhfxged2/image/upload/v1779270124/Asset_1_ngs0jf.png"
+            src={LOGO_SRC}
             alt="DENOISE logo"
+            width="220"
+            height="40"
+            decoding="async"
+            fetchpriority="high"
             className="block h-8 w-auto object-contain sm:h-10"
           />
         </a>

@@ -52,6 +52,7 @@ export default function Hero() {
             title="Operational clarity emerging from chaos"
             src="https://res.cloudinary.com/dzhfxged2/image/upload/f_auto,q_auto/1._HERO_xmjspr"
             alt="White marble executive statue writing on a clipboard for the DENOISE hero section"
+            priority
           />
         </div>
       </div>

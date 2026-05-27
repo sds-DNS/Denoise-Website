@@ -1,16 +1,27 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "../../lib/animations";
+import { buildCloudinaryUrl } from "../../lib/cloudinary";
 
-export default function ImagePanel({ title, prompt, src, alt }) {
+// 900px covers the largest panel render width across our breakpoints
+// (the lg two-column grid tops out around ~700px wide per column).
+const PANEL_WIDTH = 900;
+
+export default function ImagePanel({ title, prompt, src, alt, priority = false }) {
   if (src) {
+    const optimizedSrc = buildCloudinaryUrl(src, { width: PANEL_WIDTH });
     return (
       <motion.div
         variants={fadeUp}
         className="group relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-soft sm:aspect-[3/4] lg:aspect-auto lg:h-full lg:min-h-[360px]"
       >
         <img
-          src={src}
+          src={optimizedSrc}
           alt={alt || title}
+          // The hero loads eagerly with high priority; everything else
+          // is below the fold and can defer until it scrolls into view.
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
+          fetchpriority={priority ? "high" : "low"}
           className="h-full w-full rounded-[2rem] object-cover object-top"
         />
       </motion.div>
