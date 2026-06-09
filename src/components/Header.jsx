@@ -13,7 +13,7 @@ const navLinks = [
   { href: "#work", label: "How We Work" },
   { href: "#systems", label: "Systems" },
   { href: "#pricing", label: "Pricing" },
-  { href: "#insights", label: "Insights" },
+  // { href: "#insights", label: "Insights" },
 ];
 
 export default function Header() {
