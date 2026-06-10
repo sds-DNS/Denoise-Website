@@ -1,12 +1,23 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Clock } from "lucide-react";
 import { fadeUp, stagger, replayViewport } from "../../lib/animations";
-import { insights } from "../../data";
+import { fetchPosts, formatDate } from "../../lib/blog";
 import SectionLabel from "../ui/SectionLabel";
 import SectionHeading from "../ui/SectionHeading";
 import UnifiedCard from "../ui/UnifiedCard";
 import ImagePanel from "../ui/ImagePanel";
 
 export default function Insights() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetchPosts({ page: 1 })
+      .then((data) => setPosts(data.posts.slice(0, 3)))
+      .catch(() => {});
+  }, []);
+
   return (
     <section id="insights" className="bg-lilac-50 px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -29,26 +40,75 @@ export default function Insights() {
               practical insights, operational thinking, and implementation lessons gathered through
               working directly with scaling companies and complex execution environments.
             </motion.p>
-            <motion.a
-              variants={fadeUp}
-              href="#"
-              className="mt-7 inline-block text-sm font-bold text-brand transition hover:text-gold"
-            >
-              View all insights
-            </motion.a>
+            <motion.div variants={fadeUp}>
+              <Link
+                to="/blog"
+                className="mt-7 inline-block text-sm font-bold text-brand transition hover:text-gold"
+              >
+                View all insights →
+              </Link>
+            </motion.div>
             <div className="mt-8 grid flex-1 auto-rows-fr gap-4 md:grid-cols-2">
-              {insights.concat(["Execution Visibility in Scaling Teams"]).map((title, index) => (
-                <motion.article key={title} variants={fadeUp} className="h-full">
-                  <UnifiedCard className="flex h-full flex-col justify-between p-6">
+              {posts.map((post, index) => (
+                <motion.article key={post.id} variants={fadeUp}>
+                  <Link to={`/blog/${post.slug}`} className="group block">
+                    <UnifiedCard className="flex flex-col justify-between p-6 transition duration-200 group-hover:border-brand/30">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {post.category && (
+                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                              {post.category}
+                            </p>
+                          )}
+                          {!post.category && (
+                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                              Insight {String(index + 1).padStart(2, "0")}
+                            </p>
+                          )}
+                        </div>
+                        <h3 className="mt-3 text-xl font-black leading-tight tracking-[-0.03em] text-ink transition group-hover:text-brand">
+                          {post.title}
+                        </h3>
+                      </div>
+                      {post.excerpt && (
+                        <p className="mt-6 line-clamp-5 text-sm leading-7 text-muted-2">
+                          {post.excerpt}
+                        </p>
+                      )}
+                      <div className="mt-4 flex items-center gap-3 text-xs text-muted-3">
+                        <span>{formatDate(post.publishDate)}</span>
+                        {post.readingTime && (
+                          <>
+                            <span>·</span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {post.readingTime} min read
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </UnifiedCard>
+                  </Link>
+                </motion.article>
+              ))}
+
+              {/* Fallback placeholders while loading or if no posts yet */}
+              {posts.length === 0 && [
+                "Why Most KPI Systems Fail",
+                "Scaling Chaos vs Structured Growth",
+                "The Hidden Cost of Operational Ambiguity",
+              ].map((title, index) => (
+                <motion.article key={title} variants={fadeUp}>
+                  <UnifiedCard className="flex flex-col justify-between p-6">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
                         Insight {String(index + 1).padStart(2, "0")}
                       </p>
-                      <h3 className="mt-4 text-xl font-black leading-tight tracking-[-0.03em] text-ink">
+                      <h3 className="mt-3 text-xl font-black leading-tight tracking-[-0.03em] text-ink">
                         {title}
                       </h3>
                     </div>
-                    <p className="mt-6 text-sm leading-7 text-muted-2">
+                    <p className="mt-4 text-sm leading-7 text-muted-2">
                       A practical breakdown for leaders trying to build cleaner execution, sharper
                       visibility, and stronger operational control.
                     </p>

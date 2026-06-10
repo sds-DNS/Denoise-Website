@@ -101,7 +101,7 @@ function App() {
       <Pricing onPackageSelect={handlePackageSelect} />
       <WhyDenoise />
       <Proof />
-      {/* <Insights /> */}
+      <Insights />
       <Consultation
         submitted={submitted}
         isSubmitting={isSubmitting}

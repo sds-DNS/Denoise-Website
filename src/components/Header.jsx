@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import CTAButton from "./ui/CTAButton";
 import { buildCloudinaryUrl } from "../lib/cloudinary";
@@ -8,23 +9,38 @@ const LOGO_SRC = buildCloudinaryUrl(
   { width: 480 }
 );
 
-const navLinks = [
+const hashLinks = [
   { href: "#problem", label: "Problem" },
   { href: "#work", label: "How We Work" },
   { href: "#systems", label: "Systems" },
   { href: "#pricing", label: "Pricing" },
-  // { href: "#insights", label: "Insights" },
+  { href: "#insights", label: "Insights" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const onHome = location.pathname === "/";
 
   const closeMenu = () => setMenuOpen(false);
+
+  // Hash links only work when on the home page; otherwise route home first
+  function NavLink({ href, label, mobile }) {
+    const target = onHome ? href : `/${href}`;
+    const cls = mobile
+      ? "rounded-lg px-3 py-3 transition hover:bg-brand/10 hover:text-brand"
+      : "whitespace-nowrap hover:text-brand";
+    return (
+      <a href={target} onClick={closeMenu} className={cls}>
+        {label}
+      </a>
+    );
+  }
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-ink/8 bg-white/78 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="#home" className="flex items-center" onClick={closeMenu}>
+        <a href={onHome ? "#home" : "/"} className="flex items-center" onClick={closeMenu}>
           <img
             src={LOGO_SRC}
             alt="DENOISE logo"
@@ -38,10 +54,8 @@ export default function Header() {
 
         {/* Desktop / tablet nav */}
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink/60 md:flex lg:gap-8">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="whitespace-nowrap hover:text-brand">
-              {link.label}
-            </a>
+          {hashLinks.map((link) => (
+            <NavLink key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
         <div className="hidden md:block">
@@ -69,15 +83,8 @@ export default function Header() {
         }`}
       >
         <nav className="flex flex-col gap-1 px-6 py-4 text-base font-medium text-ink/70">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={closeMenu}
-              className="rounded-lg px-3 py-3 transition hover:bg-brand/10 hover:text-brand"
-            >
-              {link.label}
-            </a>
+          {hashLinks.map((link) => (
+            <NavLink key={link.href} href={link.href} label={link.label} mobile />
           ))}
           <div className="px-3 pb-2 pt-3" onClick={closeMenu}>
             <CTAButton>Consultation</CTAButton>
