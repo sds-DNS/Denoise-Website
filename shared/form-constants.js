@@ -14,7 +14,12 @@ export const COMPANY_SIZES = [
   "500 and Above",
 ];
 
-export const PACKAGES = ["Entry Engagement", "Scale Engagement"];
+export const PACKAGES = [
+  "Team Diagnosis",
+  "Department Diagnosis",
+  "Organizational Diagnosis",
+  "Enterprise Diagnosis",
+];
 
 // Public/free email providers we reject for business consultation requests.
 export const BLOCKED_EMAIL_DOMAINS = new Set([

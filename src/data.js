@@ -103,44 +103,92 @@ export const systems = [
 
 export const pricingPlans = [
   {
-    name: "Entry Engagement",
-    price: "$15K",
-    range: "per month",
-    term: "6 month minimum",
+    name: "Team Diagnosis",
+    price: "$5K",
+    range: "starting at",
+    term: "Package 01",
     description:
-      "For scaling companies that need the core operational foundation installed properly from the beginning.",
+      "For organizations experiencing challenges within a specific team or function.",
     features: [
-      "Core systems setup",
-      "Execution system",
-      "KPI and performance system",
-      "HR operating structure",
-      "Full implementation",
-      "Initial team structuring",
+      "One team",
+      "One team lead / manager",
+      "3–5 team member interviews",
+      "Team workflow analysis",
+      "Team communication review",
+      "Team-level Failure Point Registry",
     ],
   },
   {
-    name: "Scale Engagement",
-    price: "$20K to $30K",
-    range: "per month",
-    term: "6 month minimum",
+    name: "Department Diagnosis",
+    price: "$7K",
+    range: "starting at",
+    term: "Package 02",
     description:
-      "For companies that need deeper operational involvement, continuous optimization, and active support beyond setup.",
+      "For organizations experiencing challenges across multiple teams within a department.",
     features: [
-      "Everything in Entry Engagement",
-      "Ongoing operational management",
-      "Hiring support",
-      "Optimization cycles",
-      "Accountability enforcement",
-      "Performance correction rhythm",
+      "Multiple teams within one department",
+      "6–10 stakeholder interviews",
+      "Cross-team workflow analysis",
+      "Department communication review",
+      "Ownership and accountability mapping",
+      "Department-level Failure Point Registry",
+    ],
+  },
+  {
+    name: "Organizational Diagnosis",
+    price: "$10K",
+    range: "starting at",
+    term: "Package 03",
+    description:
+      "For organizations experiencing operational complexity across the business.",
+    features: [
+      "Company-wide assessment",
+      "Leadership interviews",
+      "Cross-functional workflow analysis",
+      "Organizational structure review",
+      "KPI and performance visibility review",
+      "Strategic Improvement Roadmap",
+    ],
+  },
+  {
+    name: "Enterprise Diagnosis",
+    price: "$25K+",
+    range: "starting at",
+    term: "Package 04",
+    description:
+      "For large and complex organizations requiring a customized scope of analysis.",
+    features: [
+      "Customized enterprise diagnostic scope",
+      "Multiple departments or business units",
+      "Executive Findings Report",
+      "Cross-business unit analysis",
+      "Organizational Risk Assessment",
+      "Enterprise Transformation Roadmap",
     ],
   },
 ];
 
-export const pricingRules = [
-  "No small isolated projects",
-  "No single-module builds",
-  "No phased cheap rollouts",
-  "Engagements only negotiate upward, not downward",
+export const pricingDeliverables = [
+  {
+    term: "01",
+    title: "Failure Point Registry",
+    text: "A structured view of operational issues affecting performance, prioritized by impact, frequency, and severity.",
+  },
+  {
+    term: "02",
+    title: "Root Cause Analysis",
+    text: "Evidence-backed identification of why those issues exist.",
+  },
+  {
+    term: "03",
+    title: "Course Correction Framework",
+    text: "A clear set of actions required to eliminate identified failure points.",
+  },
+  {
+    term: "04",
+    title: "Execution Tracking Structure",
+    text: "A practical system that allows leadership to monitor progress and ensure corrective actions are implemented successfully.",
+  },
 ];
 
 export const insights = [

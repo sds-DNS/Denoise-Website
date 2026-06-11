@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { fadeUp, stagger, replayViewport } from "../../lib/animations";
-import { pricingPlans, pricingRules } from "../../data";
+import { pricingPlans, pricingDeliverables } from "../../data";
 import SectionLabel from "../ui/SectionLabel";
 import SectionHeading from "../ui/SectionHeading";
 import UnifiedCard from "../ui/UnifiedCard";
@@ -14,109 +14,103 @@ export default function Pricing({ onPackageSelect }) {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_12%,rgb(from_var(--color-brand)_r_g_b_/_0.14),transparent_32%),radial-gradient(circle_at_84%_82%,rgb(from_var(--color-gold-bright)_r_g_b_/_0.13),transparent_30%)]" />
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr]">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={replayViewport}
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp}>
-              <SectionLabel>Pricing</SectionLabel>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <SectionHeading>
-                High-value operational transformation, not fragmented project work.
-              </SectionHeading>
-            </motion.div>
-            <div className="mt-6 space-y-5 text-lg leading-8 text-muted">
-              <motion.p variants={fadeUp}>
-                DENOISE is built for scaling companies that need complete operational structure, not
-                a small one-off system build.
-              </motion.p>
-              <motion.p variants={fadeUp}>
-                Every engagement is designed around full transformation: systems, implementation,
-                and execution discipline working together.
-              </motion.p>
-              <motion.p variants={fadeUp} className="font-semibold text-brand-deep">
-                We do not reduce the engagement into disconnected modules. We only scope upward when
-                the operational requirement is larger.
-              </motion.p>
-            </div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={stagger}
+          className="max-w-4xl"
+        >
+          <motion.div variants={fadeUp}>
+            <SectionLabel>Pricing</SectionLabel>
           </motion.div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {pricingPlans.map((plan) => (
-              <motion.div
-                key={plan.name}
-                initial="hidden"
-                whileInView="visible"
-                viewport={replayViewport}
-                variants={fadeUp}
-                className="h-full"
-              >
-                <UnifiedCard className="flex h-full flex-col p-7">
-                  <div className="flex h-full flex-col">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-gold">
-                      {plan.term}
-                    </p>
-                    <h3 className="mt-6 text-2xl font-black tracking-[-0.03em] text-ink">
-                      {plan.name}
-                    </h3>
-                    <div className="mt-6">
-                      <span className="block whitespace-nowrap text-[42px] font-black leading-none tracking-[-0.05em] text-brand lg:text-[46px]">
-                        {plan.price}
-                      </span>
-                      <span className="mt-2 block text-sm font-semibold leading-5 text-muted-3">
-                        {plan.range}
-                      </span>
-                    </div>
-                    <p className="mt-6 text-sm leading-7 text-muted-2">{plan.description}</p>
-                    <div className="mt-6 flex-1 space-y-3">
-                      {plan.features.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex gap-3 text-sm font-semibold leading-6 text-ink-soft"
-                        >
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => onPackageSelect(plan.name)}
-                      className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-4 text-sm font-black text-white shadow-brand-sm transition hover:-translate-y-0.5 hover:bg-brand-dark"
-                    >
-                      Select {plan.name}
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </UnifiedCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-4">
-          {pricingRules.map((rule, index) => (
+          <motion.div variants={fadeUp}>
+            <SectionHeading>
+              Diagnostic engagements designed around operational clarity.
+            </SectionHeading>
+          </motion.div>
+          <motion.p variants={fadeUp} className="mt-6 max-w-3xl text-lg leading-8 text-muted">
+            Each DENOISE package is structured to identify failure points, uncover root causes, and
+            define the course correction actions required to improve execution.
+          </motion.p>
+        </motion.div>
+
+        {/* Pricing cards — 4 col */}
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {pricingPlans.map((plan, i) => (
             <motion.div
-              key={rule}
+              key={plan.name}
               initial="hidden"
               whileInView="visible"
               viewport={replayViewport}
               variants={fadeUp}
               className="h-full"
             >
-              <UnifiedCard className="flex h-full min-h-[116px] flex-col justify-between p-5">
-                <span className="text-xs font-black tracking-[0.16em] text-gold">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-5 text-[15px] font-semibold leading-6 tracking-[-0.01em] text-ink-soft">
-                  {rule}
+              <UnifiedCard className="flex h-full flex-col p-7">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-gold">
+                  {plan.term}
                 </p>
+                <h3 className="mt-5 text-2xl font-black leading-tight tracking-[-0.03em] text-ink">
+                  {plan.name}
+                </h3>
+                <div className="mt-5">
+                  <p className="text-sm font-semibold text-muted-3">{plan.range}</p>
+                  <span className="mt-1 block text-[42px] font-black leading-none tracking-[-0.05em] text-brand">
+                    {plan.price}
+                  </span>
+                </div>
+                <p className="mt-5 text-sm leading-7 text-muted-2">{plan.description}</p>
+                <div className="mt-5 flex-1 space-y-3">
+                  {plan.features.map((feature) => (
+                    <div
+                      key={feature}
+                      className="flex gap-3 text-sm font-semibold leading-6 text-ink-soft"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onPackageSelect(plan.name)}
+                  className="mt-7 inline-flex w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand px-6 py-4 text-sm font-black text-white shadow-brand-sm transition hover:-translate-y-0.5 hover:bg-brand-dark"
+                >
+                  Select Package <ArrowRight className="h-4 w-4 shrink-0" />
+                </button>
               </UnifiedCard>
             </motion.div>
           ))}
         </div>
+
+        {/* Deliverables — 4 col */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={stagger}
+          className="mt-16"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl font-black tracking-[-0.04em] text-ink md:text-4xl"
+          >
+            DENOISE Deliverables
+          </motion.h2>
+          <div className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {pricingDeliverables.map((d) => (
+              <motion.div key={d.term} variants={fadeUp} className="h-full">
+                <UnifiedCard className="flex h-full flex-col p-7">
+                  <span className="text-xs font-black tracking-[0.16em] text-gold">{d.term}</span>
+                  <p className="mt-5 text-xl font-black leading-snug tracking-[-0.02em] text-ink">
+                    {d.title}
+                  </p>
+                  <p className="mt-4 text-[15px] leading-7 text-muted-2">{d.text}</p>
+                </UnifiedCard>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
