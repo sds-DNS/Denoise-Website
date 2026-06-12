@@ -50,9 +50,9 @@ export default function Insights() {
             </motion.div>
             <div className="mt-8 grid flex-1 auto-rows-fr gap-4 md:grid-cols-2">
               {posts.map((post, index) => (
-                <motion.article key={post.id} variants={fadeUp}>
-                  <Link to={`/blog/${post.slug}`} className="group block">
-                    <UnifiedCard className="flex flex-col justify-between p-6 transition duration-200 group-hover:border-brand/30">
+                <motion.article key={post.id} variants={fadeUp} className="h-full">
+                  <Link to={`/blog/${post.slug}`} className="group flex h-full">
+                    <UnifiedCard className="flex h-full w-full flex-col justify-between p-6 transition duration-200 group-hover:border-brand/30">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
                           {post.category && (
@@ -98,8 +98,8 @@ export default function Insights() {
                 "Scaling Chaos vs Structured Growth",
                 "The Hidden Cost of Operational Ambiguity",
               ].map((title, index) => (
-                <motion.article key={title} variants={fadeUp}>
-                  <UnifiedCard className="flex flex-col justify-between p-6">
+                <motion.article key={title} variants={fadeUp} className="h-full">
+                  <UnifiedCard className="flex h-full flex-col justify-between p-6">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
                         Insight {String(index + 1).padStart(2, "0")}

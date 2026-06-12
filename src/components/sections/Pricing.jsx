@@ -36,7 +36,7 @@ export default function Pricing({ onPackageSelect }) {
         </motion.div>
 
         {/* Pricing cards — 4 col */}
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:subgrid]">
           {pricingPlans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -44,9 +44,9 @@ export default function Pricing({ onPackageSelect }) {
               whileInView="visible"
               viewport={replayViewport}
               variants={fadeUp}
-              className="h-full"
+              className="lg:row-span-6 lg:grid lg:grid-rows-subgrid"
             >
-              <UnifiedCard className="flex h-full flex-col p-7">
+              <UnifiedCard className="grid grid-rows-subgrid p-7 lg:row-span-6">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-gold">
                   {plan.term}
                 </p>
@@ -60,7 +60,7 @@ export default function Pricing({ onPackageSelect }) {
                   </span>
                 </div>
                 <p className="mt-5 text-sm leading-7 text-muted-2">{plan.description}</p>
-                <div className="mt-5 flex-1 space-y-3">
+                <div className="mt-5 space-y-3 self-start">
                   {plan.features.map((feature) => (
                     <div
                       key={feature}
@@ -74,7 +74,7 @@ export default function Pricing({ onPackageSelect }) {
                 <button
                   type="button"
                   onClick={() => onPackageSelect(plan.name)}
-                  className="mt-7 inline-flex w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand px-6 py-4 text-sm font-black text-white shadow-brand-sm transition hover:-translate-y-0.5 hover:bg-brand-dark"
+                  className="mt-7 inline-flex w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand px-6 py-4 text-sm font-black text-white shadow-brand-sm transition hover:-translate-y-0.5 hover:bg-brand-dark self-end"
                 >
                   Select Package <ArrowRight className="h-4 w-4 shrink-0" />
                 </button>
@@ -97,10 +97,10 @@ export default function Pricing({ onPackageSelect }) {
           >
             DENOISE Deliverables
           </motion.h2>
-          <div className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:[grid-template-rows:subgrid]">
             {pricingDeliverables.map((d) => (
-              <motion.div key={d.term} variants={fadeUp} className="h-full">
-                <UnifiedCard className="flex h-full flex-col p-7">
+              <motion.div key={d.term} variants={fadeUp} className="lg:row-span-3 lg:grid lg:grid-rows-subgrid">
+                <UnifiedCard className="grid grid-rows-subgrid p-7 lg:row-span-3">
                   <span className="text-xs font-black tracking-[0.16em] text-gold">{d.term}</span>
                   <p className="mt-5 text-xl font-black leading-snug tracking-[-0.02em] text-ink">
                     {d.title}
