@@ -120,7 +120,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await notion.pages.create({
-      parent: { database_id: databaseId },
+      parent: { type: "data_source_id", data_source_id: databaseId } as any,
       properties: {
         Name: { title: [{ text: { content: fields.name } }] },
         Email: { email: fields.email },
