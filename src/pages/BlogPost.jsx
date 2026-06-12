@@ -126,14 +126,7 @@ export default function BlogPost() {
     <div className="min-h-screen bg-cream">
       <Header />
 
-      {/* Cover image */}
-      {post.coverImageUrl && (
-        <div className="h-[50vh] max-h-[560px] w-full overflow-hidden bg-lilac-100 pt-[65px]">
-          <img src={post.coverImageUrl} alt={post.title} className="h-full w-full object-cover" />
-        </div>
-      )}
-
-      <main className={`px-6 lg:px-8 ${post.coverImageUrl ? "pt-12" : "pt-32"} pb-24`}>
+      <main className="px-6 pt-32 pb-24 lg:px-8">
         <div className="mx-auto max-w-3xl">
           {/* Back link */}
           <Link
