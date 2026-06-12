@@ -14,7 +14,7 @@ export default function Insights() {
 
   useEffect(() => {
     fetchPosts({ page: 1 })
-      .then((data) => setPosts(data.posts.slice(0, 3)))
+      .then((data) => setPosts(data.posts.slice(0, 4)))
       .catch(() => {});
   }, []);
 
