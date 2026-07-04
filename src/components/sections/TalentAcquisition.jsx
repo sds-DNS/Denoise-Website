@@ -30,7 +30,7 @@ const reasons = [
   },
 ];
 
-export default function TalentAcquisition() {
+export default function TalentAcquisition({ onHiringClick }) {
   return (
     <section id="talent-acquisition" className="relative overflow-hidden px-6 py-24 lg:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgb(from_var(--color-brand)_r_g_b_/_0.10),transparent_30%),radial-gradient(circle_at_14%_80%,rgb(from_var(--color-gold-bright)_r_g_b_/_0.12),transparent_30%)]" />
@@ -54,7 +54,13 @@ export default function TalentAcquisition() {
             decisions through role clarity, structured screening, and practical recommendations.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
-            <CTAButton>Discuss a Hiring Requirement</CTAButton>
+            <button
+              type="button"
+              onClick={onHiringClick}
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-black text-white shadow-brand-cta transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark"
+            >
+              Discuss a Hiring Requirement
+            </button>
             <a
               href="#recruitment-process"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-brand/20 bg-white px-6 py-3 text-sm font-black text-brand transition duration-300 hover:-translate-y-0.5 hover:border-brand/50"
@@ -103,7 +109,13 @@ export default function TalentAcquisition() {
                   A structured hiring process from role clarity to joining confirmation.
                 </h3>
               </div>
-              <CTAButton>Start a Hiring Discussion</CTAButton>
+              <button
+                type="button"
+                onClick={onHiringClick}
+                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-black text-white shadow-brand-cta transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark"
+              >
+                Start a Hiring Discussion
+              </button>
             </motion.div>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

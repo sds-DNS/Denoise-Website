@@ -13,7 +13,6 @@ const hashLinks = [
   { href: "#operational-diagnosis", label: "Operational Diagnosis" },
   { href: "#talent-acquisition", label: "Talent Acquisition" },
   { href: "#insights", label: "Knowledge Hub" },
-  { href: "#about", label: "About" },
 ];
 
 function LinkedinIcon({ className }) {

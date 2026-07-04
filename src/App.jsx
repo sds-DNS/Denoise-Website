@@ -5,7 +5,6 @@ import Hero from "./components/sections/Hero";
 import WhatWeDo from "./components/sections/WhatWeDo";
 import TalentAcquisition from "./components/sections/TalentAcquisition";
 import Insights from "./components/sections/Insights";
-import About from "./components/sections/About";
 import Consultation from "./components/sections/Consultation";
 import Pricing from "./components/sections/Pricing";
 import { validateConsultationForm } from "./lib/validation";
@@ -45,6 +44,8 @@ function App() {
     });
     document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const handleHiringClick = () => handlePackageSelect("Talent Acquisition");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -89,9 +90,8 @@ function App() {
       <Hero />
       <WhatWeDo />
       <Pricing onPackageSelect={handlePackageSelect} />
-      <TalentAcquisition />
+      <TalentAcquisition onHiringClick={handleHiringClick} />
       <Insights />
-      <About />
       <Consultation
         submitted={submitted}
         isSubmitting={isSubmitting}

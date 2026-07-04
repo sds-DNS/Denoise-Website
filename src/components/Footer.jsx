@@ -32,8 +32,7 @@ const navLinks = [
   { label: "Operational Diagnosis", href: "#operational-diagnosis" },
   { label: "Talent Acquisition", href: "#talent-acquisition" },
   { label: "Knowledge Hub", href: "#insights" },
-  { label: "About", href: "#about" },
-  { label: "Insights", href: "/blog" },
+  { label: "Articles", href: "/blog" },
 ];
 
 export default function Footer() {
@@ -110,8 +109,22 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-black uppercase tracking-[0.18em] text-ink">Legal</h3>
           <div className="mt-4 flex flex-col gap-3 text-sm text-muted-3">
-            <a href="#" className="transition hover:text-brand">Privacy Policy</a>
-            <a href="#" className="transition hover:text-brand">Terms & Conditions</a>
+            <a
+              href="https://app.notion.com/p/Denoise-Website-Privacy-Policy-38ea8c40d4b480baa35ec40080a7de4b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-brand"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://app.notion.com/p/Denoise-Website-Terms-and-Conditions-38ea8c40d4b480ad9380c5df7f9138cf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-brand"
+            >
+              Terms & Conditions
+            </a>
           </div>
         </div>
       </div>

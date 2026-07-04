@@ -28,7 +28,12 @@ export default function WhatWeDo() {
                 actions that help leadership see what is moving, delayed, blocked, or at risk.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <CTAButton>See Packages</CTAButton>
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-black text-white shadow-brand-cta transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark"
+                >
+                  See Packages
+                </a>
                 <a
                   href="#consultation"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-brand/20 bg-white px-6 py-3 text-sm font-black text-brand transition duration-300 hover:-translate-y-0.5 hover:border-brand/50"

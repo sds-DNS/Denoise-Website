@@ -45,7 +45,7 @@ export default function Insights() {
                 to="/blog"
                 className="mt-7 inline-block text-sm font-bold text-brand transition hover:text-gold"
               >
-                View all insights →
+                View all articles →
               </Link>
             </motion.div>
             <div className="mt-8 grid flex-1 auto-rows-fr gap-4 md:grid-cols-2">
@@ -160,7 +160,7 @@ export default function Insights() {
                 Join WhatsApp Group
               </a>
             </div>
-            <div className="rounded-[2rem] border border-brand/10 bg-lilac-50 p-6">
+            <div className="flex flex-col rounded-[2rem] border border-brand/10 bg-lilac-50 p-6">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white">
                   <MessageCircle className="h-5 w-5" />
@@ -170,18 +170,20 @@ export default function Insights() {
                   <p className="text-xs text-muted-3">Community · HR & People Operations</p>
                 </div>
               </div>
-              {[
-                "How do we structure probation reviews in the UAE?",
-                "What should be included in a role scorecard?",
-                "How do we screen candidates beyond CVs?",
-              ].map((message) => (
-                <div
-                  key={message}
-                  className="mb-3 max-w-xs rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm leading-6 text-ink shadow-sm"
-                >
-                  {message}
-                </div>
-              ))}
+              <div className="flex flex-1 flex-col justify-between gap-3">
+                {[
+                  "How do we structure probation reviews in the UAE?",
+                  "What should be included in a role scorecard?",
+                  "How do we screen candidates beyond CVs?",
+                ].map((message) => (
+                  <div
+                    key={message}
+                    className="flex flex-1 items-center rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm leading-6 text-ink shadow-sm"
+                  >
+                    {message}
+                  </div>
+                ))}
+              </div>
             </div>
           </UnifiedCard>
         </motion.div>
