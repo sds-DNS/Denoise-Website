@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Clock } from "lucide-react";
+import { Clock, MessageCircle } from "lucide-react";
 import { fadeUp, stagger, replayViewport } from "../../lib/animations";
 import { fetchPosts, formatDate } from "../../lib/blog";
 import SectionLabel from "../ui/SectionLabel";
@@ -19,7 +19,7 @@ export default function Insights() {
   }, []);
 
   return (
-    <section id="insights" className="bg-lilac-50 px-6 py-24 lg:px-8">
+    <section id="insights" className="bg-lilac-50 px-6 py-24 lg:px-8" aria-label="Knowledge Hub">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-stretch gap-12 lg:grid-cols-[.72fr_.98fr]">
           <motion.div
@@ -30,15 +30,15 @@ export default function Insights() {
             className="flex h-full flex-col pt-1"
           >
             <motion.div variants={fadeUp}>
-              <SectionLabel>Insights</SectionLabel>
+              <SectionLabel>Knowledge Hub</SectionLabel>
             </motion.div>
             <motion.div variants={fadeUp}>
-              <SectionHeading>Operational insights.</SectionHeading>
+              <SectionHeading>Operational and organizational knowledge for growing teams.</SectionHeading>
             </motion.div>
             <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg leading-8 text-muted">
-              We believe operational knowledge should compound across the industry. DENOISE shares
-              practical insights, operational thinking, and implementation lessons gathered through
-              working directly with scaling companies and complex execution environments.
+              Practical thinking on operations, hiring, HR, performance, leadership systems, and
+              execution. DENOISE shares implementation lessons gathered through working directly
+              with scaling companies and complex execution environments.
             </motion.p>
             <motion.div variants={fadeUp}>
               <Link
@@ -131,6 +131,60 @@ export default function Insights() {
             />
           </motion.div>
         </div>
+
+        {/* HR Community WhatsApp card */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={replayViewport}
+          variants={fadeUp}
+          className="mt-12"
+        >
+          <UnifiedCard className="grid items-stretch gap-8 bg-white p-8 md:grid-cols-[.75fr_1fr]">
+            <div className="flex flex-col">
+              <SectionLabel>HR Community</SectionLabel>
+              <h3 className="mt-4 text-2xl font-black leading-snug tracking-[-0.03em] text-ink md:text-3xl">
+                Join the HR & People Operations WhatsApp community.
+              </h3>
+              <p className="mt-4 flex-1 text-base leading-8 text-muted">
+                A practical discussion space for HR professionals in MENA — covering hiring,
+                compliance, people ops, and workforce strategy.
+              </p>
+              <a
+                href="https://chat.whatsapp.com/FZUcQ48ogjU7vdxilLgkr2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-white shadow-brand-cta transition hover:-translate-y-0.5 hover:bg-brand-dark"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Join WhatsApp Group
+              </a>
+            </div>
+            <div className="rounded-[2rem] border border-brand/10 bg-lilac-50 p-6">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-black text-ink">DENOISE HR MENA</p>
+                  <p className="text-xs text-muted-3">Community · HR & People Operations</p>
+                </div>
+              </div>
+              {[
+                "How do we structure probation reviews in the UAE?",
+                "What should be included in a role scorecard?",
+                "How do we screen candidates beyond CVs?",
+              ].map((message) => (
+                <div
+                  key={message}
+                  className="mb-3 max-w-xs rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm leading-6 text-ink shadow-sm"
+                >
+                  {message}
+                </div>
+              ))}
+            </div>
+          </UnifiedCard>
+        </motion.div>
       </div>
     </section>
   );
