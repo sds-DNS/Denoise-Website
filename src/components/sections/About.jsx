@@ -37,41 +37,13 @@ export default function About() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,rgb(from_var(--color-brand)_r_g_b_/_0.10),transparent_30%),linear-gradient(180deg,var(--color-white),var(--color-cream))]" />
       <div className="relative mx-auto max-w-7xl">
-        {/* Intro */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={replayViewport}
-          variants={stagger}
-          className="grid items-end gap-10 lg:grid-cols-[.85fr_1.15fr]"
-        >
-          <div>
-            <motion.div variants={fadeUp}>
-              <SectionLabel>About</SectionLabel>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <SectionHeading>Built to remove operational noise.</SectionHeading>
-            </motion.div>
-          </div>
-          <div className="space-y-4 text-lg leading-8 text-muted">
-            <motion.p variants={fadeUp}>
-              DENOISE was created because companies often grow faster than their internal systems.
-              Teams get busier, leaders lose visibility, and execution becomes harder to control.
-            </motion.p>
-            <motion.p variants={fadeUp}>
-              We believe operational structure should create visibility, accountability, and
-              predictable execution, not unnecessary bureaucracy.
-            </motion.p>
-          </div>
-        </motion.div>
-
         {/* Founders */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={replayViewport}
           variants={stagger}
-          className="mt-14"
+          className=""
         >
           <motion.div
             variants={fadeUp}

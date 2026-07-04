@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { buildCloudinaryUrl } from "../lib/cloudinary";
 
@@ -109,22 +110,12 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-black uppercase tracking-[0.18em] text-ink">Legal</h3>
           <div className="mt-4 flex flex-col gap-3 text-sm text-muted-3">
-            <a
-              href="https://app.notion.com/p/Denoise-Website-Privacy-Policy-38ea8c40d4b480baa35ec40080a7de4b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-brand"
-            >
+            <Link to="/privacy-policy" className="transition hover:text-brand">
               Privacy Policy
-            </a>
-            <a
-              href="https://app.notion.com/p/Denoise-Website-Terms-and-Conditions-38ea8c40d4b480ad9380c5df7f9138cf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-brand"
-            >
+            </Link>
+            <Link to="/terms-and-conditions" className="transition hover:text-brand">
               Terms & Conditions
-            </a>
+            </Link>
           </div>
         </div>
       </div>

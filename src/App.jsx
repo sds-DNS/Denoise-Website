@@ -5,6 +5,7 @@ import Hero from "./components/sections/Hero";
 import WhatWeDo from "./components/sections/WhatWeDo";
 import TalentAcquisition from "./components/sections/TalentAcquisition";
 import Insights from "./components/sections/Insights";
+import About from "./components/sections/About";
 import Consultation from "./components/sections/Consultation";
 import Pricing from "./components/sections/Pricing";
 import { validateConsultationForm } from "./lib/validation";
@@ -92,6 +93,7 @@ function App() {
       <Pricing onPackageSelect={handlePackageSelect} />
       <TalentAcquisition onHiringClick={handleHiringClick} />
       <Insights />
+      <About />
       <Consultation
         submitted={submitted}
         isSubmitting={isSubmitting}
