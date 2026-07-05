@@ -136,8 +136,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error("Notion create page failed:", error);
+  } catch (error: any) {
+    console.error("Notion create page failed:", JSON.stringify({
+      code: error?.code,
+      status: error?.status,
+      message: error?.message,
+      body: error?.body,
+    }));
     return res.status(502).json({ error: "Could not submit your request. Please try again." });
   }
 }
