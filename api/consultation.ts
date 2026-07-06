@@ -123,7 +123,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       parent: { database_id: databaseId },
       properties: {
         Name: { title: [{ text: { content: fields.name } }] },
-        Email: { email: fields.email },
+        Email: { rich_text: [{ text: { content: fields.email } }] },
         Position: { rich_text: [{ text: { content: fields.position } }] },
         Company: { rich_text: [{ text: { content: fields.company } }] },
         "Company Size": { select: { name: fields.companySize } },
