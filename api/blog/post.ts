@@ -62,6 +62,20 @@ function mapBlock(block: any): any {
       return { type, richText: mapRichText(content.rich_text) };
     case "table_of_contents":
       return { type };
+    case "table":
+      return {
+        type,
+        tableWidth: content.table_width,
+        hasColumnHeader: content.has_column_header,
+        hasRowHeader: content.has_row_header,
+        // rows are fetched separately and injected after this call
+        rows: [],
+      };
+    case "table_row":
+      return {
+        type,
+        cells: (content.cells ?? []).map((cell: any[]) => mapRichText(cell)),
+      };
     default:
       return { type: "unsupported", originalType: type };
   }
@@ -111,7 +125,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!visible) return res.status(404).json({ error: "Post not found" });
 
     // Fetch all blocks (handles pagination)
-    const blocks: any[] = [];
+    const rawBlocks: any[] = [];
     let cursor: string | undefined;
     do {
       const blockRes: any = await notion.blocks.children.list({
@@ -119,9 +133,31 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         page_size: 100,
         ...(cursor ? { start_cursor: cursor } : {}),
       });
-      blocks.push(...blockRes.results.map(mapBlock));
+      rawBlocks.push(...blockRes.results);
       cursor = blockRes.has_more ? blockRes.next_cursor : undefined;
     } while (cursor);
+
+    // Map blocks, fetching table rows for table blocks
+    const blocks: any[] = [];
+    for (const raw of rawBlocks) {
+      const mapped = mapBlock(raw);
+      if (mapped.type === "table") {
+        // Fetch all table_row children
+        const rows: any[] = [];
+        let rowCursor: string | undefined;
+        do {
+          const rowRes: any = await notion.blocks.children.list({
+            block_id: raw.id,
+            page_size: 100,
+            ...(rowCursor ? { start_cursor: rowCursor } : {}),
+          });
+          rows.push(...rowRes.results.map(mapBlock));
+          rowCursor = rowRes.has_more ? rowRes.next_cursor : undefined;
+        } while (rowCursor);
+        mapped.rows = rows;
+      }
+      blocks.push(mapped);
+    }
 
     const post = {
       id: page.id,

@@ -119,6 +119,52 @@ function Block({ block }) {
         </pre>
       );
 
+    case "table": {
+      if (!block.rows?.length) return null;
+      const [headerRow, ...bodyRows] = block.rows;
+      return (
+        <div className="my-6 overflow-x-auto rounded-2xl border border-ink/8">
+          <table className="w-full min-w-full border-collapse text-sm">
+            {block.hasColumnHeader && headerRow && (
+              <thead>
+                <tr className="border-b border-ink/10 bg-lilac-100">
+                  {headerRow.cells.map((cell, ci) => (
+                    <th
+                      key={ci}
+                      className="px-4 py-3 text-left text-xs font-black uppercase tracking-[0.12em] text-ink"
+                    >
+                      <RichText spans={cell} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {(block.hasColumnHeader ? bodyRows : block.rows).map((row, ri) => (
+                <tr
+                  key={ri}
+                  className="border-b border-ink/8 last:border-0 odd:bg-white even:bg-lilac-50"
+                >
+                  {row.cells.map((cell, ci) => (
+                    <td
+                      key={ci}
+                      className={`px-4 py-3 leading-6 text-muted-2 ${
+                        block.hasRowHeader && ci === 0
+                          ? "font-semibold text-ink"
+                          : ""
+                      }`}
+                    >
+                      <RichText spans={cell} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
     default:
       return null;
   }

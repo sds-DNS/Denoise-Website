@@ -120,10 +120,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await notion.pages.create({
-      parent: { type: "data_source_id", data_source_id: databaseId } as any,
+      parent: { database_id: databaseId },
       properties: {
         Name: { title: [{ text: { content: fields.name } }] },
-        Email: { email: fields.email },
+        Email: { rich_text: [{ text: { content: fields.email } }] },
         Position: { rich_text: [{ text: { content: fields.position } }] },
         Company: { rich_text: [{ text: { content: fields.company } }] },
         "Company Size": { select: { name: fields.companySize } },
@@ -136,8 +136,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error("Notion create page failed:", error);
+  } catch (error: any) {
+    console.error("Notion create page failed:", JSON.stringify({
+      code: error?.code,
+      status: error?.status,
+      message: error?.message,
+      body: error?.body,
+    }));
     return res.status(502).json({ error: "Could not submit your request. Please try again." });
   }
 }

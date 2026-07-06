@@ -45,10 +45,10 @@ export default function Consultation({
         >
           <div>
             <motion.div variants={fadeUp}>
-              <SectionLabel>Initial Consultation</SectionLabel>
+              <SectionLabel>Start the conversation</SectionLabel>
             </motion.div>
             <motion.div variants={fadeUp}>
-              <SectionHeading>Request an Initial Consultation</SectionHeading>
+              <SectionHeading>Let us understand what is actually breaking.</SectionHeading>
             </motion.div>
             <motion.p variants={fadeUp} className="mt-6 text-lg leading-8 text-muted">
               Tell us where operational clarity is breaking inside your organization.

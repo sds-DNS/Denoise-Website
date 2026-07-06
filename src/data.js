@@ -197,6 +197,50 @@ export const insights = [
   "The Hidden Cost of Operational Ambiguity",
 ];
 
+export const recruitmentStages = [
+  ["01", "Role Discovery & Alignment", "We understand the business, role, team structure, required experience, compensation range, and hiring timeline."],
+  ["02", "Candidate Sourcing", "We identify suitable candidates through LinkedIn, professional networks, referrals, talent databases, and relevant job platforms."],
+  ["03", "Candidate Assessment", "We assess experience, communication, career progression, salary expectations, availability, motivation, and role suitability."],
+  ["04", "Candidate Presentation", "We provide a candidate profile, recruiter assessment, strengths, potential concerns, and a hiring recommendation."],
+  ["05", "Interview Coordination", "We manage candidate communication, interview scheduling, feedback collection, and follow-up discussions."],
+  ["06", "Offer & Placement Support", "We assist with offer coordination, candidate communication, acceptance management, and joining confirmation."],
+];
+
+export const founders = [
+  {
+    name: "Shanike De Silva",
+    initials: "SD",
+    role: "Co-Founder, Operations & Execution Systems",
+    email: "shanike@denoisesystems.com",
+    linkedin: "https://www.linkedin.com/in/shanikede/",
+    credentials: [
+      "11 years across operations, delivery, project management, retail, SaaS, Web3, and consulting",
+      "Head of Delivery and Execution at Haqq Network, leading KPI systems, PMO structure, dashboards, approvals, risk tracking, HR information management, and execution governance",
+      "Led HelloResume delivery with a seven-engineer team and supported launch under a four-million-dollar budget",
+      "Implemented IS Quant across 130+ Keells retail locations with an 85 percent post-implementation acceptance rate",
+      "Built advisory and venture experience through Nodabank, Ceydigital, Innovation Quotient, Sapien Medica, Particle Execution, BLAID Tech, and Orion Ganymede",
+      "BSc Information Technology, HND Networking, and HND Computer Science",
+    ],
+    text: "Shanike focuses on operational clarity, KPI architecture, execution visibility, systems design, and turning scattered business activity into predictable performance.",
+  },
+  {
+    name: "Janelle Siy",
+    initials: "JS",
+    role: "Co-Founder, HR & People Operations",
+    email: "jane@denoisesystems.com",
+    linkedin: "https://www.linkedin.com/in/jane-siy/",
+    credentials: [
+      "Certified Human Resources Manager with 16+ years across the Middle East, Africa, Asia, and Europe",
+      "HR Director at Haqq Network, building HR infrastructure, people planning, engagement platforms, HR shared services, and global people practices",
+      "Former Head of People MENA at Bybit, leading HR strategy, talent management, culture, compliance, HR analytics, and employer branding",
+      "Scaled organizations from 30 to 250 employees in 10 months while maintaining more than 90 percent retention",
+      "Reduced time-to-hire by 40 percent and improved hiring quality by 35 percent through AI-enabled recruitment systems",
+      "Experience across SAP, Workday, Oracle HCM Fusion, SuccessFactors, Zoho People and Recruit, HiBob, Bamboo, Notion, and HR analytics tools",
+    ],
+    text: "Janelle focuses on talent acquisition, HR strategy, workforce planning, people operations, organizational development, and building HR systems that support growth.",
+  },
+];
+
 export const proofItems = [
   { icon: Network, text: "Operational systems across multiple business functions" },
   { icon: Gauge, text: "KPI governance and execution visibility structures" },

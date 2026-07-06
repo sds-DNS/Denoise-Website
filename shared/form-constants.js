@@ -19,6 +19,7 @@ export const PACKAGES = [
   "Department Diagnosis",
   "Organizational Diagnosis",
   "Enterprise Diagnosis",
+  "Talent Acquisition",
 ];
 
 // Public/free email providers we reject for business consultation requests.
