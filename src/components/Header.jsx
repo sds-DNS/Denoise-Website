@@ -73,14 +73,14 @@ export default function Header() {
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-6 text-sm font-medium text-ink/60 md:flex lg:gap-8">
+          <nav className="hidden items-center gap-6 text-sm font-medium text-ink/60 lg:flex lg:gap-8">
             {hashLinks.map((link) => (
               <NavLink key={link.href} href={link.href} label={link.label} />
             ))}
           </nav>
 
           {/* Social icons + CTA */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <SocialPill href="mailto:consult@denoisesystems.com" label="Email DENOISE">
               <Mail className="h-4 w-4 stroke-[2.4]" />
             </SocialPill>
@@ -97,7 +97,7 @@ export default function Header() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="inline-flex items-center justify-center rounded-lg p-2 text-ink transition hover:bg-brand/10 hover:text-brand md:hidden"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-ink transition hover:bg-brand/10 hover:text-brand lg:hidden"
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -106,7 +106,7 @@ export default function Header() {
         {/* Mobile expandable menu */}
         <div
           id="mobile-menu"
-          className={`overflow-hidden border-t border-ink/8 bg-white/95 backdrop-blur-xl transition-[max-height] duration-300 ease-in-out md:hidden ${
+          className={`overflow-hidden border-t border-ink/8 bg-white/95 backdrop-blur-xl transition-[max-height] duration-300 ease-in-out lg:hidden ${
             menuOpen ? "max-h-96" : "max-h-0"
           }`}
         >
@@ -123,8 +123,8 @@ export default function Header() {
 
       {/* Floating Book Consultation button */}
       <a
-        href="#consultation"
-        className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-black text-white shadow-brand transition hover:-translate-y-0.5 hover:bg-brand-dark md:inline-flex"
+        href={onHome ? "#consultation" : "/#consultation"}
+        className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-black text-white shadow-brand transition hover:-translate-y-0.5 hover:bg-brand-dark lg:inline-flex"
       >
         Book Consultation
       </a>
