@@ -93,7 +93,7 @@ export default function Footer() {
             </a>
             <p className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-              314 Taraf 1, JVC, Dubai, United Arab Emirates
+              Taraf 1, JVC, Dubai, United Arab Emirates
             </p>
             <div className="flex items-center gap-3 pt-2">
               <SocialPill href="mailto:consult@denoisesystems.com" label="Email DENOISE">

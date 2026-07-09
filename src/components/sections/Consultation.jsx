@@ -185,7 +185,7 @@ export default function Consultation({
             </button>
             {submitted && (
               <p className="mt-4 text-center text-sm font-semibold text-brand-deep">
-                Thank you. Your request has been received — we'll be in touch shortly.
+                Thank you. Your request has been received, we'll be in touch shortly.
               </p>
             )}
             {errorMessage && !submitted && (

@@ -33,7 +33,7 @@ function ContactBlock() {
     <div className="rounded-2xl border border-ink/8 bg-white p-6">
       <p className="font-black text-ink">DENOISE SYSTEMS FZ LLC</p>
       <div className="mt-3 space-y-1 text-sm text-muted-2">
-        <p>314 Taraf 1, JVC</p>
+        <p>Taraf 1, JVC</p>
         <p>Dubai, United Arab Emirates</p>
         <a href="mailto:consult@denoisesystems.com" className="block transition hover:text-brand">
           consult@denoisesystems.com
